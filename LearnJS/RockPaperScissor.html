@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn If Else</title>
+</head>
+<body>
+    <p>RocK , Paper, Scissors game</p>
+    <button onclick="func('Rock')">Rock</button>
+    <button onclick="func('Paper')">Paper</button>
+    <button onclick="func('Scissor')">Scissor</button>
+    <button onclick="func('reset')">Reset</button>
+    <p id="result"></p>
+</body>
+<script>
+    let score = JSON.parse(localStorage.getItem('score')) ||
+        {       wins:0,
+                loss:0,
+                tie:0
+            };
+    // if(!score){
+    //         score={
+                // wins:0,
+                // loss:0,
+                // tie:0
+    //         };
+    //     }
+    function func(param) {
+        let compMove = '';
+        let result = '';
+
+        let randomNumber = Math.random();
+
+        if(randomNumber>=0 && randomNumber<1/3){
+            compMove='Rock';
+        }
+        else if(randomNumber>=1/3 && randomNumber<2/3){
+            compMove='Paper';
+        }
+        else if(randomNumber>=2/3 && randomNumber<=1){
+            compMove='Scissor';
+        }
+
+        if( param === 'Rock')
+        {
+           if(compMove === 'Scissor'){
+            result = 'Win';
+           }
+           else if(compMove === 'Paper'){
+            result = 'Lose';
+           }
+           else{
+            result = 'Draw';
+           }
+        }
+        else if( param === 'Scissor')
+        {
+           if(compMove === 'Paper'){
+            result = 'Win';
+           }
+           else if(compMove === 'Stone'){
+            result = 'Lose';
+           }
+           else{
+            result = 'Draw';
+           }
+        }
+        else{
+            if(compMove === 'Stone'){
+            result = 'Win';
+           }
+           else if(compMove === 'Scissor'){
+            result = 'Lose';
+           }
+           else{
+            result = 'Draw';
+           }
+        }
+        if (result ==='Win') {
+            score.wins+=1;
+        } else if (result ==='Lose') {
+            score.loss+=1;
+        }else{
+            score.tie+=1;
+        }
+        if(param == "reset"){
+            score.wins = 0;
+            score.loss = 0;
+            score.tie = 0;
+            localStorage.removeItem('score');
+        }
+        localStorage.setItem("message",JSON.stringify(score));
+        document.getElementById("result").innerHTML = `WIN : ${score.wins} , Loss: ${score.loss} , Tie: ${score.tie}`;
+        alert(`You picked ${param} and computer picked ${compMove} : RESULT : ${result}`);
+        
+    }
+</script>
+</html>
