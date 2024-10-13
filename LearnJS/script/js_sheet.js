@@ -1,3 +1,5 @@
+//What are Higher Order Function? 
+// A function which takes another function as a parameter or return a function is called Higher Order Function
 //Promises and Promise chaining
 let cart = ["shampoo", "mouse", "keyboard", "iphone"];
 
